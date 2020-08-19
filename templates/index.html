@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <div class="top">
+        <span class="hello">Witaj, {{ user.username }}!</span>
+
+        <a href="raports">Raport</a>
+        <div class="pull-right">
+            <a href="logout">Wyloguj</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
+    <meta charset="UTF-8">
+    <title>Logowanie</title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            GKRAP
+            <form class="login-form" action="login" method="post">
+                {% csrf_token %}
+              <input type="text" name="email" placeholder="username"/>
+              <input type="password" name="password" placeholder="hasło"/>
+              <button>ZALOGUJ</button>
+            </form>
+            {% for message in messages %}
+                <h3> {{message}} </h3>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
