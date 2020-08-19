@@ -33,7 +33,7 @@ html {
     cursor: pointer;
 }
 
-.form input {
+.form input, textarea {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -41,7 +41,11 @@ html {
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+textarea#rap {
+    resize: none;
 }
 
 .top {

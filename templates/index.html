@@ -11,10 +11,17 @@
     <div class="top">
         <span class="hello">Witaj, {{ user.username }}!</span>
 
-        <a href="raports">Raport</a>
+        {% if user.is_superuser %}
+        <a href="raports_maker">Stwórz raport</a>
+        {% endif %}
+
+        <a href="raports_view">Przeglądaj raporty</a>
         <div class="pull-right">
             <a href="logout">Wyloguj</a>
         </div>
     </div>
+
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

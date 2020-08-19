@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import auth
 from django.contrib import messages
+from .models import Raport
 
 
 # Create your views here.
@@ -29,3 +30,21 @@ def login(request):
 def logout(request):
 	auth.logout(request)
 	return redirect('index')
+
+
+def raports_maker(request):
+	if request.method == "POST":
+		title = request.POST['title']
+		content = request.POST['content']
+		author_name = request.user.first_name
+		author_lastname = request.user.last_name
+		if title != '' and content != '' and not title.isspace() and not content.isspace():
+			raport = Raport.create(title, content, author_name, author_lastname)
+			raport.save()
+			messages.info(request, 'Raport wysłany')
+			return redirect('raports_maker')
+		else:
+			messages.info(request, 'Tytuł i treść nie mogą być puste')
+			return redirect('reports_maker')
+	else:
+		return render(request, 'raports_maker.html')
