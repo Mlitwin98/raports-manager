@@ -3,24 +3,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
     <meta charset="UTF-8">
     <title>Index</title>
 </head>
 <body>
     <div class="top">
-        <span class="hello">Witaj, {{ user.username }}!</span>
-
-        {% if user.is_superuser %}
-        <a href="raports_maker">Stwórz raport</a>
-        {% endif %}
-
-        <a href="raports_view">Przeglądaj raporty</a>
-        <div class="pull-right">
-            <a href="logout">Wyloguj</a>
-        </div>
+        <ul class="nav">
+          <li class="nav_name">Witaj, {{ user.username }}!</li>
+          <li><a href="{% url 'index' %}">Strona główna</a></li>
+            {% if user.is_superuser %}
+                <li><a href="raports_maker">Stwórz raport</a></li>
+            {% endif %}
+          <li><a href="raports_view">Przeglądaj raporty</a></li>
+          <li style="float:right"><a href="logout">Wyloguj</a></li>
+        </ul>
     </div>
-
     {% block content %}
     {% endblock %}
 </body>
