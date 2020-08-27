@@ -40,12 +40,12 @@
 
         {% for raport in raports %}
             <div class="form_raports">
-                <form action="abc" method="post">
-                    {% csrf_token %}
-                    <span class="title">{{raport.title}}</span>
-                    <textarea disabled id="rap" rows="5">{{raport.content}}</textarea>
-                    <input disabled type="text" value="{{raport.author_name}} {{raport.author_lastname}}"><br>
-                    <input disabled type="text" value="{{raport.dateTime.year}}.{{raport.dateTime.month}}.{{raport.dateTime.day}}"><br>
+                <form action="{% url 'raports_edit' raport.id %}" method="get">
+                    <span class="title">{{raport.title}}</span><br><br>
+                    <textarea disabled id="rap" rows="10">{{raport.content}}</textarea>
+                    <input class="name" disabled type="text" value="{{raport.author_name}} {{raport.author_lastname}}"><br>
+                    <input disabled type="text" value="{{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}}"><br>
+                    <button>Edytuj</button>
                 </form>
             </div>
         {% endfor %}

@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="form_edit">
+    <form action="{% url 'raports_edit' raport.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{raport.title}}"><br>
+        <textarea id="rap" rows="10" name="content">{{raport.content}}</textarea>
+        <a href="{% url 'raports_view' %}"><button type="button">ANULUJ</button></a>
+        <button>ZAPISZ</button>
+        {% for message in messages %}
+            <h3> {{message}} </h3>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}

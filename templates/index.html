@@ -9,18 +9,18 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Raporty GK</title>
 </head>
 <body>
     <div class="top">
         <ul class="nav">
-          <li class="nav_name">Witaj, {{ user.username }}!</li>
+          <li class="nav_name">Witaj, {{ user.first_name }}!</li>
           <li><a href="{% url 'index' %}">Strona główna</a></li>
             {% if user.is_superuser %}
-                <li><a href="raports_maker">Stwórz raport</a></li>
+                <li><a href="{% url 'raports_maker' %}">Stwórz raport</a></li>
             {% endif %}
-          <li><a href="raports_view">Przeglądaj raporty</a></li>
-          <li style="float:right"><a href="logout">Wyloguj</a></li>
+          <li><a href="{% url 'raports_view' %}">Przeglądaj raporty</a></li>
+          <li style="float:right"><a href="{% url 'logout' %}">Wyloguj</a></li>
         </ul>
     </div>
     {% block content %}

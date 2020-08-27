@@ -5,7 +5,7 @@
     <form action="raports_maker" method="post">
         {% csrf_token %}
         <input type="text" name="title" placeholder="Tytuł raportu"><br>
-        <textarea id="rap" rows="5" name="content" placeholder="Treść raportu"></textarea>
+        <textarea id="rap" rows="10" name="content" placeholder="Treść raportu"></textarea>
         <button>DODAJ</button>
         {% for message in messages %}
             <h3> {{message}} </h3>

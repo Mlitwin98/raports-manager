@@ -31,6 +31,18 @@ html {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+.form_edit {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 450px;
+    margin: 0 auto 90px;
+    padding: 45px;
+    padding-top:30px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
 
 .form_fixed{
     width: 20%;
@@ -46,14 +58,29 @@ html {
     text-transform: uppercase;
     outline: 0;
     background: #4CAF50;
-    width: 100%;
+    width: 20%;
     border: 0;
     padding: 15px;
     color: #FFFFFF;
     font-size: 14px;
-    -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    float: right;
+    margin-top: -2%;
+}
+
+.form_edit button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 30%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin: 5px;
 }
 
 .form_fixed button {
@@ -65,7 +92,6 @@ html {
     padding: 15px;
     color: #FFFFFF;
     font-size: 14px;
-    -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
 }
@@ -96,7 +122,7 @@ input, textarea {
     font-family: Verdana, Geneva, sans-serif;
 }
 
-.form_raports input, textarea {
+.form_raports input, .form_raports textarea {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -104,8 +130,19 @@ input, textarea {
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 20px;
     color:black;
+}
+
+.form_raports input {
+    width: 25%;
+    float: left;
+    margin-right: 1%;
+    text-align: center;
+}
+
+.form_raports input.name{
+    width:40%;
 }
 
 textarea#rap {
