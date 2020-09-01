@@ -1,2 +1,2 @@
 # raports-manager
-Site for creating/viewing raports
+Site for creating/viewing reports
