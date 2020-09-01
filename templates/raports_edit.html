@@ -7,10 +7,24 @@
         <input type="text" name="title" value="{{raport.title}}"><br>
         <textarea id="rap" rows="10" name="content">{{raport.content}}</textarea>
         <a href="{% url 'raports_view' %}"><button type="button">ANULUJ</button></a>
-        <button>ZAPISZ</button>
+        <button type="button" onclick="showDiv()">USUŃ</button>
+        <button name="save">ZAPISZ</button>
         {% for message in messages %}
             <h3> {{message}} </h3>
         {% endfor %}
     </form>
 </div>
+<div class="form_edit" id="show" style="visibility:hidden">
+    <span class="title">Czy jesteś pewien?</span>
+    <form action="{% url 'raports_edit' raport.id %}" method="post">
+        {% csrf_token %}
+        <button name="delete">USUŃ</button>
+    </form>
+</div>
+
+<script>
+    function showDiv() {
+        document.getElementById("show").style.visibility = "visible"
+    }
+</script>
 {% endblock %}

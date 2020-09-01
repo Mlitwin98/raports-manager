@@ -79,19 +79,19 @@ def raports_view(request):
 				raports = raports.filter(author_lastname__iexact=search_lastname)
 			if search_date != '':
 				dates = search_date.split(' - ')
-				dateStart = datetime.strptime(dates[0], '%m/%d/%Y').date()
-				dateEnd = datetime.strptime(dates[1], '%m/%d/%Y').date()
+				dateStart = datetime.strptime(dates[0], '%m/%d/%Y').replace(hour=0, minute=0)
+				dateEnd = datetime.strptime(dates[1], '%m/%d/%Y').replace(hour=23, minute=59)
 
 				raports = raports.filter(dateTime__gte=dateStart)
 				raports = raports.filter(dateTime__lte=dateEnd)
-			return render(request, 'raports_view.html', {"raports": raports})
+			return render(request, 'raports_view.html', {"raports": raports[::-1]})
 		else:
 			visibleRaports = 50
 			numOfRaports = Raport.objects.all().count()
 			if numOfRaports < visibleRaports:
 				visibleRaports = numOfRaports
 			raports = Raport.objects.all()[numOfRaports-visibleRaports:numOfRaports]
-			return render(request, 'raports_view.html', {"raports": raports})
+			return render(request, 'raports_view.html', {"raports": raports[::-1]})
 	else:
 		return redirect('login')
 
@@ -100,18 +100,23 @@ def raports_edit(request, raport_id):
 	if request.user.is_authenticated:
 		raport = get_object_or_404(Raport, id=raport_id)
 		if request.method == "POST":
-			title = request.POST['title']
-			content = request.POST['content']
-			if title != '' and content != '' and not title.isspace() and not content.isspace():
-				raport.title = title
-				raport.content = content
-				raport.author_name = request.user.first_name
-				raport.author_lastname = request.user.last_name
-				raport.save()
+			if 'save' in request.POST:
+				title = request.POST['title']
+				content = request.POST['content']
+				if title != '' and content != '' and not title.isspace() and not content.isspace():
+					now = datetime.now()
+					dt_string = now.strftime("%d-%m-%Y %H:%M")
+					aut_string = request.user.first_name + " " + request.user.last_name
+					raport.title = title
+					raport.content = content + '\n\n\nEdytowane przez: ' + aut_string + " " + dt_string
+					raport.save()
+					return redirect('raports_view')
+				else:
+					messages.info(request, 'Tytuł i treść nie mogą być puste')
+					return render(request, 'raports_edit.html', {"raport": raport})
+			elif 'delete' in request.POST:
+				raport.delete()
 				return redirect('raports_view')
-			else:
-				messages.info(request, 'Tytuł i treść nie mogą być puste')
-				return render(request, 'raports_edit.html', {"raport": raport})
 		else:
 			return render(request, 'raports_edit.html', {"raport": raport})
 	else:

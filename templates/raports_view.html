@@ -44,8 +44,10 @@
                     <span class="title">{{raport.title}}</span><br><br>
                     <textarea disabled id="rap" rows="10">{{raport.content}}</textarea>
                     <input class="name" disabled type="text" value="{{raport.author_name}} {{raport.author_lastname}}"><br>
-                    <input disabled type="text" value="{{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}}"><br>
-                    <button>Edytuj</button>
+                    <input disabled type="text" value="{{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}} {{raport.dateTime.hour}}:{{raport.dateTime.minute|stringformat:'02d'}}"><br>
+                    {% if user.is_superuser %}
+                        <button>Edytuj</button>
+                    {% endif %}
                 </form>
             </div>
         {% endfor %}
