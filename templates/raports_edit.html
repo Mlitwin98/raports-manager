@@ -1,30 +1,44 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="form_edit">
+<div class='form form_title form_maker circular-top mb-0'>
+    <span class='title'> Raport z dnia {{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}}</span>
+</div>
+<div class="form form_maker">
     <form action="{% url 'raports_edit' raport.id %}" method="post">
         {% csrf_token %}
-        <input type="text" name="title" value="{{raport.title}}"><br>
-        <textarea id="rap" rows="10" name="content">{{raport.content}}</textarea>
-        <a href="{% url 'raports_view' %}"><button type="button">ANULUJ</button></a>
-        <button type="button" onclick="showDiv()">USUŃ</button>
-        <button name="save">ZAPISZ</button>
+        <input class='badge-pill pl-4' type="text" name="title" value="{{raport.title}}"><br>
+        <textarea class='circular-whole pl-4' id="rap" rows="10" name="content">{{raport.content}}</textarea>
+        <a href="{% url 'raports_view' %}"><button class='mt-4 mr-4 pb-3 pt-3 pl-5 pr-5 btn-info badge-pill' type="button">WRÓĆ</button></a>
+        <button class='mt-4 mr-4 pb-3 pt-3 pl-5 pr-5 btn-info badge-pill' name="save">ZAPISZ</button>
+                <button class='mt-4 pb-3 pt-3 pl-5 pr-5 btn-outline-danger badge-pill' type="button" data-toggle="modal" data-target="#modal">USUŃ</button>
         {% for message in messages %}
             <h3> {{message}} </h3>
         {% endfor %}
     </form>
 </div>
-<div class="form_edit" id="show" style="visibility:hidden">
-    <span class="title">Czy jesteś pewien?</span>
-    <form action="{% url 'raports_edit' raport.id %}" method="post">
-        {% csrf_token %}
-        <button name="delete">USUŃ</button>
-    </form>
-</div>
 
-<script>
-    function showDiv() {
-        document.getElementById("show").style.visibility = "visible"
-    }
-</script>
+<!-- Modal -->
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title title" id="exampleModalLabel">Czy jesteś pewien?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mr-auto ml-auto">
+        Usunięcie jest nieodwracalne
+      </div>
+      <div class="modal-footer p-0 pb-3 mr-auto ml-auto">
+        <button type="button" class="btn mt-4 pb-3 pt-3 pl-5 pr-5 btn-secondary badge-pill" data-dismiss="modal">ANULUJ</button>
+        <form action="{% url 'raports_edit' raport.id %}" method="post">
+            {% csrf_token %}
+            <button class='btn mt-4 pb-3 pt-3 pl-5 pr-5 btn-danger badge-pill' name="delete">USUŃ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

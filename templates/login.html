@@ -2,23 +2,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
     <meta charset="UTF-8">
     <title>Logowanie</title>
 </head>
 <body>
-    <div class="login-page">
-        <div class="form">
-            GKRAP
-            <form class="login-form" action="login" method="post">
-                {% csrf_token %}
-              <input type="text" name="email" placeholder="username"/>
-              <input type="password" name="password" placeholder="hasło"/>
-              <button>ZALOGUJ</button>
-            </form>
-            {% for message in messages %}
-                <h3> {{message}} </h3>
-            {% endfor %}
+    <div class='container-fluid coloured h-100'>
+        <div class='container d-flex flex-column h-100 justify-content-center'>
+            <div class='form circular-top mb-0'>
+               <span class='title'> Logowanie raporty </span>
+            </div>
+            <div class="form">
+                <form class="login-form" action="login" method="post">
+                    {% csrf_token %}
+                <input class='badge-pill pl-4' type="text" name="email" placeholder="Login"/>
+                <input class='badge-pill pl-4' type="password" name="password" placeholder="Hasło"/>
+                <button class='mt-4 pb-3 pt-3 pl-5 pr-5 btn-info badge-pill'>ZALOGUJ SIĘ</button>
+                </form>
+                {% for message in messages %}
+                    <div class='p-3 mt-3 alert-danger circular-whole circular-whole alrt'> {{message}} </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>

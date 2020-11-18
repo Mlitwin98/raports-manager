@@ -2,55 +2,55 @@
 
 {% block content %}
 
-<div class="main_container">
-    <div class="left">
-        <div class="form_fixed">
-            <form action="raports_view" method="post">
-                {% csrf_token %}
-                <input type="text" name="title" placeholder="Tytuł szukanego"><br>
-                <input type="text" name="content" placeholder="Słowo klucz w treści"><br>
-                <input type="text" name="name" placeholder="Imię autora"><br>
-                <input type="text" name="lastname" placeholder="Nazwisko autora"><br>
-                <input type="text" name="date" placeholder="Przedział dat raportu"><br>
-                <script type="text/javascript">
-                    $(function() {
+<nav class="navbar navbar-expand-lg my_nav mb-5 circular-whole" id='sticky'>
+    <form class='form-inline-my my-2 my-lg-0 ml-auto' action="raports_view" method="post">
+        <span>Wyszukaj raport: </span>
+        {% csrf_token %}
+        <input class='badge-pill pl-4 ml-1 mr-1' type="text" name="title" placeholder="Tytuł szukanego">
+        <input class='badge-pill pl-4 ml-1 mr-1' type="text" name="content" placeholder="Słowa klucz w treści">
+        <input class='badge-pill pl-4 ml-1 mr-1' type="text" name="name" placeholder="Imię autora">
+        <input class='badge-pill pl-4 ml-1 mr-1' type="text" name="lastname" placeholder="Nazwisko autora">
+        <input class='badge-pill pl-4 ml-1 mr-1' type="text" name="date" placeholder="Przedział dat raportu">
+        <script type="text/javascript">
+            $(function() {
 
-                      $('input[name="date"]').daterangepicker({
-                          autoUpdateInput: false,
-                          locale: {
-                              cancelLabel: 'Clear'
-                          }
-                      });
+                $('input[name="date"]').daterangepicker({
+                    autoUpdateInput: false,
+                    locale: {
+                        cancelLabel: 'Clear'
+                    }
+                });
 
-                      $('input[name="date"]').on('apply.daterangepicker', function(ev, picker) {
-                          $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-                      });
+                $('input[name="date"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                });
 
-                      $('input[name="date"]').on('cancel.daterangepicker', function(ev, picker) {
-                          $(this).val('');
-                      });
+                $('input[name="date"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
 
-                    });
-                    </script>
-                <button>SZUKAJ</button>
+            });
+            </script>
+        <button class='pb-3 pt-3 pl-5 pr-5 ml-1 btn-outline-info badge-pill'>SZUKAJ</button>
+    </form>
+</nav>
+<div class="w-100">
+    {% for raport in raports %}
+        <div class='form form_title form_raports circular-top mb-0'>
+            <span class="title">{{raport.title}}</span><br><br>
+        </div>
+        <div class="form form_raports">
+            <form action="{% url 'raports_edit' raport.id %}" method="get">
+                <textarea class='circular-whole pl-4' disabled id="rap" rows="10">{{raport.content}}</textarea>
+                <div class='form-inline'>
+                    <input class='badge-pill pl-4 mr-1' disabled type="text" value="{{raport.author_name}} {{raport.author_lastname}}"><br>
+                    <input class='badge-pill pl-4 mr-5' disabled type="text" value="{{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}} {{raport.dateTime.hour}}:{{raport.dateTime.minute|stringformat:'02d'}}"><br>
+                    {% if user.is_superuser %}
+                        <button class='pb-3 pt-3 pl-5 pr-5 btn-info badge-pill edit_btn'>Edytuj</button>
+                    {% endif %}
+                </div>
             </form>
         </div>
-    </div>
-    <div class="right">
-
-        {% for raport in raports %}
-            <div class="form_raports">
-                <form action="{% url 'raports_edit' raport.id %}" method="get">
-                    <span class="title">{{raport.title}}</span><br><br>
-                    <textarea disabled id="rap" rows="10">{{raport.content}}</textarea>
-                    <input class="name" disabled type="text" value="{{raport.author_name}} {{raport.author_lastname}}"><br>
-                    <input disabled type="text" value="{{raport.dateTime.day|stringformat:'02d'}}-{{raport.dateTime.month|stringformat:'02d'}}-{{raport.dateTime.year}} {{raport.dateTime.hour}}:{{raport.dateTime.minute|stringformat:'02d'}}"><br>
-                    {% if user.is_superuser %}
-                        <button>Edytuj</button>
-                    {% endif %}
-                </form>
-            </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
 </div>
 {% endblock %}

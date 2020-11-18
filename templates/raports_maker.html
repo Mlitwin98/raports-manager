@@ -1,14 +1,17 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="form">
+<div class='form form_title form_maker circular-top mb-0 mt-2'>
+    <span class='title'> Raport </span>
+</div>
+<div class="form form_maker">
     <form action="raports_maker" method="post">
         {% csrf_token %}
-        <input type="text" name="title" placeholder="Tytuł raportu"><br>
-        <textarea id="rap" rows="10" name="content" placeholder="Treść raportu"></textarea>
-        <button>DODAJ</button>
+        <input class='badge-pill pl-4' type="text" name="title" id='title' placeholder="Tytuł">
+        <textarea class='circular-whole pl-4' id="rap" rows="10" name="content" placeholder="Treść"></textarea>
+        <button class='mt-4 pb-3 pt-3 pl-5 pr-5 btn-info badge-pill'>DODAJ</button>
         {% for message in messages %}
-            <h3> {{message}} </h3>
+            <div class='p-3 mt-3 alert-danger circular-whole alrt'> {{message}} </div>
         {% endfor %}
     </form>
 </div>
