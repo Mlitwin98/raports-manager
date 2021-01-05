@@ -14,3 +14,7 @@ class Raport(models.Model):
 	def create(cls, title, content, author_name, author_lastname):
 		raport = cls(title=title, content=content, author_name=author_name, author_lastname=author_lastname)
 		return raport
+
+class Task(models.Model):
+	title = models.TextField()
+	complete = models.BooleanField(default=False)

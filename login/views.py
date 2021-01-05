@@ -3,7 +3,7 @@ from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from datetime import datetime
-from .models import Raport
+from .models import Raport, Task
 
 
 # Create your views here.
@@ -119,5 +119,45 @@ def raports_edit(request, raport_id):
 				return redirect('raports_view')
 		else:
 			return render(request, 'raports_edit.html', {"raport": raport})
+	else:
+		return redirect('login')
+
+
+def to_do_list(request):
+	if request.user.is_authenticated:
+		if request.user.is_superuser:
+			if request.POST:
+				if request.POST['title'] != '' and not request.POST['title'].isspace():
+					task = Task(title=request.POST['title'])
+					task.save()
+				return redirect('to_do_list')
+			else:
+				tasks = Task.objects.all()
+				return render(request, 'to_do_list.html', {"tasks": tasks})
+		else:
+			return redirect('index')
+	else:
+		return redirect('login')
+
+def delete_task(request, taskID):
+	if request.user.is_authenticated:
+		if request.user.is_superuser and not taskID == None:
+			Task.objects.get(id=taskID).delete()
+			return redirect('to_do_list')
+		else:
+			return redirect('index')
+	else:
+		return redirect('login')
+
+def edit_task(request, taskID):
+	if request.user.is_authenticated:
+		if request.user.is_superuser and request.POST:
+			task = Task.objects.get(id=taskID)
+			task.title = request.POST[f'title{taskID}']
+			task.complete = request.POST.get(f'complete{taskID}', '') == 'on'
+			task.save()
+			return redirect('to_do_list')
+		else:
+			return redirect('index')
 	else:
 		return redirect('login')
