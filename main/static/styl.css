@@ -76,10 +76,11 @@ li a{
     padding: 12px 14px;
     text-decoration: none;
     text-align: center;
-    border-radius: 5px;
+    background-color: #253341;
 }
 
 li a:hover{
+    text-decoration: none;
     color: black;
     background-color: white;
 }
@@ -158,5 +159,9 @@ button{
     background: #192734;
     padding-top:20px;
     padding-bottom: 20px;
+}
+
+hr{
+    border-top: 1px solid #5a5e63;
 }
 

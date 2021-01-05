@@ -7,13 +7,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'styl.css' %}">
     <meta charset="UTF-8">
-    <title>Raporty GK</title>
+    <title>System raportów UMiG GK</title>
 </head>
 <body>
   <div class='container-fluid coloured h-100'>
@@ -22,14 +23,15 @@
           <li class="nav_name">Witaj, {{ user.first_name }}!</li>
         </ul>
         <ul class="nav my-2 my-lg-0 ml-auto">
-          <li class="nav_item"><a href="{% url 'index' %}" class="nav-link active">Strona główna</a></li>
+          <li class="nav_item"><a href="{% url 'index' %}" class='badge-pill pl-4 pr-4 ml-1 mr-1'>Strona główna</a></li>
             {% if user.is_superuser %}
-                <li class="nav_item"><a href="{% url 'raports_maker' %}" class="nav-link active">Stwórz raport</a></li>
+                <li class="nav_item"><a href="{% url 'raports_maker' %}" class='badge-pill pl-4 pr-4 ml-1 mr-1'>Stwórz raport</a></li>
             {% endif %}
-          <li class="nav_item"><a href="{% url 'raports_view' %}" class="nav-link active">Przeglądaj raporty</a></li>
-          <li class="nav_item" style="float:right"><a href="{% url 'logout' %}" class="nav-link active">Wyloguj</a></li>
+          <li class="nav_item"><a href="{% url 'raports_view' %}" class='badge-pill pl-4 pr-4 ml-1 mr-1'>Przeglądaj raporty</a></li>
+          <li class="nav_item" style="float:right"><a href="{% url 'logout' %}" class='badge-pill pl-4 pr-4 ml-1 mr-1'>Wyloguj</a></li>
         </ul>
     </nav>
+    <hr class='mt-0'>
     {% block content %}
     {% endblock %}
   </div>
