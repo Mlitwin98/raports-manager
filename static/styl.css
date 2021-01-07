@@ -76,10 +76,11 @@ li a{
     padding: 12px 14px;
     text-decoration: none;
     text-align: center;
-    border-radius: 5px;
+    background-color: #253341;
 }
 
 li a:hover{
+    text-decoration: none;
     color: black;
     background-color: white;
 }
@@ -148,6 +149,10 @@ button{
     width:15% !important;
 }
 
+.form-inline-my input.to_do{
+    width:45% !important;
+}
+
 .form-inline-my span{
     font-size:25px;
 }
@@ -160,3 +165,18 @@ button{
     padding-bottom: 20px;
 }
 
+hr{
+    border-top: 1px solid;
+    color:  #5a5e63;
+}
+
+.task_container{
+    background: #192734;
+    border-radius: 5px;
+    color: white;
+    font-size:25px;
+}
+
+.task{
+    background-color: #253341;
+}
