@@ -36,6 +36,9 @@
     </nav>
     <hr class='mt-0'>
     {% block content %}
+    <div class='d-flex w-100 justify-content-center'>
+      {{calendar|safe}}
+    </div>
     {% endblock %}
   </div>
 </body>

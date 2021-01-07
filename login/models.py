@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import Group
 
 
 # Create your models here.
@@ -18,3 +19,5 @@ class Raport(models.Model):
 class Task(models.Model):
 	title = models.TextField()
 	complete = models.BooleanField(default=False)
+
+Group.add_to_class('calendar_link', models.TextField(blank=True))

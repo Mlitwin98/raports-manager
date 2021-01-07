@@ -9,7 +9,12 @@ from .models import Raport, Task
 # Create your views here.
 def index(request):
 	if request.user.is_authenticated:
-		return render(request, "index.html")
+		calendar=''
+		try:
+			calendar = request.user.groups.get().calendar_link
+		except:
+			pass
+		return render(request, "index.html", {'calendar':calendar})
 	else:
 		return redirect('login')
 
